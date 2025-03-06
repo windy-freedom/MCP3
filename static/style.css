@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+#game {
+    margin: 20px auto;
+    width: 600px;
+}
+canvas {
+    border: 1px solid black;
+}
+button {
+    margin: 5px;
+    padding: 10px;
+}
+#resources, #status {
+    margin: 10px;
+}

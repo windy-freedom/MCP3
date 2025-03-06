@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Strategy Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Multiplayer Strategy Game</h1>
+    <div id="game">
+        <canvas id="grid" width="300" height="300"></canvas>
+        <div id="resources"></div>
+        <button onclick="startGame()">Start Game</button>
+        <div>
+            <button onclick="makeMove('collect_wood')">Collect Wood</button>
+            <button onclick="makeMove('collect_gold')">Collect Gold</button>
+        </div>
+        <div id="status"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
