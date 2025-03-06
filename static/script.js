@@ -2,7 +2,7 @@ const socket = io();
 let playerId;
 const canvas = document.getElementById('grid');
 const ctx = canvas.getContext('2d');
-const cellSize = 100;
+const cellSize = 100; // 保持单元格大小不变，因为canvas已经扩大到900x900
 
 socket.on('player_id', (id) => {
     playerId = id;
@@ -36,8 +36,8 @@ function makeMove(action, position = null) {
 function updateGame(data) {
     // 绘制网格
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < 3; i++) {
-        for (let j = 0; j < 3; j++) {
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
             ctx.strokeRect(i * cellSize, j * cellSize, cellSize, cellSize);
             if (data.grid[j][i]) {
                 ctx.fillText(data.grid[j][i], i * cellSize + 40, j * cellSize + 60);

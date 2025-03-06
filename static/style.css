@@ -4,7 +4,7 @@ body {
 }
 #game {
     margin: 20px auto;
-    width: 600px;
+    width: 900px;
 }
 canvas {
     border: 1px solid black;

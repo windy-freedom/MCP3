@@ -139,7 +139,7 @@ def handle_connect():
 def start_game():
     if len(server.players) + len(server.ai_players) >= 2:
         all_players = server.players + [ai.name for ai in server.ai_players]
-        server.state = GameState(grid_size=3, players=all_players)
+        server.state = GameState(grid_size=9, players=all_players)
         emit('game_started', {'grid': server.state.grid, 'resources': server.state.resources}, broadcast=True)
     else:
         emit('error', 'Not enough players')
