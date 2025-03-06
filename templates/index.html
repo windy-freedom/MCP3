@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Strategy Game</title>
+    <title>Territory Conquest - Strategic Resource Management Game</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Multiplayer Strategy Game</h1>
+    <h1>Territory Conquest</h1>
     <div id="game">
         <canvas id="grid" width="900" height="900"></canvas>
-        <div id="resources"></div>
-        <button onclick="startGame()">Start Game</button>
-        <div>
-            <button onclick="makeMove('collect_wood')">Collect Wood</button>
-            <button onclick="makeMove('collect_gold')">Collect Gold</button>
+        <div id="resources">
+            Loading resources...
         </div>
-        <div id="status"></div>
+        <div class="control-panel">
+            <button onclick="startGame()" class="start-btn">Start New Game</button>
+        </div>
+        <div class="control-panel">
+            <button onclick="makeMove('collect_wood')">🌳 Collect Wood</button>
+            <button onclick="makeMove('collect_gold')">💰 Collect Gold</button>
+        </div>
+        <div id="status">
+            Welcome to Territory Conquest! Click "Start New Game" to begin.
+        </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>

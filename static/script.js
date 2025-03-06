@@ -34,21 +34,45 @@ function makeMove(action, position = null) {
 }
 
 function updateGame(data) {
-    // 绘制网格
+    // 设置绘图样式
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#3498db';
+    ctx.font = 'bold 24px Roboto';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    // 绘制网格
     for (let i = 0; i < 9; i++) {
         for (let j = 0; j < 9; j++) {
+            // 绘制单元格
             ctx.strokeRect(i * cellSize, j * cellSize, cellSize, cellSize);
+            
+            // 如果格子被占领，绘制玩家标记
             if (data.grid[j][i]) {
-                ctx.fillText(data.grid[j][i], i * cellSize + 40, j * cellSize + 60);
+                const player = data.grid[j][i];
+                // 为不同玩家使用不同颜色
+                ctx.fillStyle = player === 'player' ? '#3498db' : '#e74c3c';
+                ctx.fillText(player === 'player' ? '👤' : '🤖',
+                           i * cellSize + cellSize/2,
+                           j * cellSize + cellSize/2);
             }
         }
     }
-    // 更新资源
+
+    // 更新资源显示
     let resourcesDiv = document.getElementById('resources');
-    resourcesDiv.innerHTML = '';
+    resourcesDiv.innerHTML = '<h2>Resources</h2>';
     for (let player in data.resources) {
-        resourcesDiv.innerHTML += `${player}: Wood=${data.resources[player].wood}, Gold=${data.resources[player].gold}<br>`;
+        const resources = data.resources[player];
+        const playerEmoji = player === 'player' ? '👤' : '🤖';
+        resourcesDiv.innerHTML += `
+            <div class="player-resources">
+                <span>${playerEmoji} ${player}</span>:
+                <span>🌳 Wood: ${resources.wood}</span> |
+                <span>💰 Gold: ${resources.gold}</span>
+            </div>
+        `;
     }
 }
 
