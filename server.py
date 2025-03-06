@@ -132,8 +132,8 @@ def index():
 @socketio.on('connect')
 def handle_connect():
     print('Player connected')
-    server.players.append(request.sid)
-    emit('player_id', request.sid)
+    server.players.append("player")
+    emit('player_id', "player")
 
 @socketio.on('start_game')
 def start_game():
