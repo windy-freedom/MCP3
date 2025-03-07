@@ -257,7 +257,12 @@ class GameState:
         return territory_score + resource_score
 
     def is_game_over(self):
-        return self.turn >= 20 or all(self.grid[i][j] is not None for i in range(self.grid_size) for j in range(self.grid_size))
+        current_round = (self.turn // len(self.players)) + 1
+        # 只有在达到20回合或所有非河流格子都被占领时才结束
+        all_occupied = all(self.grid[i][j] is not None and self.grid[i][j] != "river"
+                         for i in range(self.grid_size)
+                         for j in range(self.grid_size))
+        return current_round > 20 or all_occupied
 
     def get_winner(self):
         scores = {p: self.calculate_score(p) for p in self.players}
@@ -306,7 +311,8 @@ class MCTSNode:
         state = self.state.copy()
         current_player = self.player
         
-        while not state.is_game_over():
+        current_round = (state.turn // len(state.players)) + 1
+        while current_round <= 20 and not state.is_game_over():
             moves = state.available_moves(current_player)
             
             # 平衡策略：根据当前资源状态选择行动
@@ -522,8 +528,8 @@ def handle_move(data):
             # AI回合
             for ai in server.ai_players:
                 if ai.name in server.state.players and not server.state.is_game_over():
-                    # 计算当前回合数（每三次行动为一回合）
-                    current_round = (server.state.turn // 3) + 1
+                    # 计算当前回合数（基于玩家数量）
+                    current_round = (server.state.turn // len(server.state.players)) + 1
                     current_round = min(current_round, 20)  # 最大回合数限制
                     
                     # 发送AI思考中的状态
@@ -552,8 +558,8 @@ def handle_move(data):
                     if ai.name == "AI2":
                         next_player = "player"
                     
-                    # 计算当前回合数（每三次行动为一回合）
-                    current_round = (server.state.turn // 3) + 1
+                    # 计算当前回合数（基于玩家数量）
+                    current_round = (server.state.turn // len(server.state.players)) + 1
                     current_round = min(current_round, 20)  # 最大回合数限制
                     
                     # 获取当前有效的事件

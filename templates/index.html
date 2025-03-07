@@ -11,10 +11,18 @@
     <h1><i class="fas fa-chess-rook"></i> Territory Conquest</h1>
     <div id="game">
         <div class="game-container">
+            <div class="game-controls left-panel">
+                <div id="events-panel" class="events-panel">
+                    <h3><i class="fas fa-bolt"></i> 当前事件</h3>
+                    <div id="active-events" class="active-events">
+                        <!-- 事件将在这里动态显示 -->
+                    </div>
+                </div>
+            </div>
             <div class="game-grid">
                 <canvas id="grid" width="900" height="900"></canvas>
             </div>
-            <div class="game-controls">
+            <div class="game-controls right-panel">
                 <div id="resources">
                     <div class="resource-item">
                         <i class="fas fa-crown"></i>
@@ -94,12 +102,6 @@
                                 <li>总分最高的玩家获胜</li>
                             </ul>
                         </div>
-                    </div>
-                </div>
-                <div id="events-panel" class="events-panel">
-                    <h3><i class="fas fa-bolt"></i> 当前事件</h3>
-                    <div id="active-events" class="active-events">
-                        <!-- 事件将在这里动态显示 -->
                     </div>
                 </div>
                 <div class="control-panel">
