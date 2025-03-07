@@ -3,7 +3,7 @@
 <head>
     <title>Territory Conquest - Strategic Resource Management Game</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -17,8 +17,8 @@
             <div class="game-controls">
                 <div id="resources">
                     <div class="resource-item">
-                        <i class="fas fa-user"></i>
-                        <span>Player 1</span>
+                        <i class="fas fa-crown"></i>
+                        <span>自由之邦</span>
                         <div class="resource-details">
                             <div class="resource-value">
                                 <i class="fas fa-tree"></i>
@@ -31,8 +31,8 @@
                         </div>
                     </div>
                     <div class="resource-item">
-                        <i class="fas fa-user"></i>
-                        <span>Player 2</span>
+                        <i class="fas fa-shield-halved"></i>
+                        <span>钢铁之心</span>
                         <div class="resource-details">
                             <div class="resource-value">
                                 <i class="fas fa-tree"></i>
@@ -45,8 +45,8 @@
                         </div>
                     </div>
                     <div class="resource-item">
-                        <i class="fas fa-user"></i>
-                        <span>Player 3</span>
+                        <i class="fas fa-sword"></i>
+                        <span>机械神国</span>
                         <div class="resource-details">
                             <div class="resource-value">
                                 <i class="fas fa-tree"></i>
@@ -64,6 +64,43 @@
                         <i class="fas fa-play"></i>
                         Start New Game
                     </button>
+                    <button onclick="showRules()" class="rules-btn">
+                        <i class="fas fa-book"></i>
+                        游戏规则
+                    </button>
+                </div>
+                <!-- 规则弹窗 -->
+                <div id="rulesModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>游戏规则</h2>
+                        <div class="rules-text">
+                            <h3>基本规则：</h3>
+                            <ul>
+                                <li>游戏在9x9的网格上进行</li>
+                                <li>玩家轮流行动，每回合可以选择：收集木材、收集金币或占领格子</li>
+                            </ul>
+                            <h3>资源：</h3>
+                            <ul>
+                                <li>收集木材：每次获得3个木材</li>
+                                <li>收集金币：每次获得2个金币</li>
+                                <li>占领格子：需要消耗2个木材和1个金币</li>
+                            </ul>
+                            <h3>胜利条件：</h3>
+                            <ul>
+                                <li>游戏在20回合后或棋盘被占满时结束</li>
+                                <li>占领的格子每个计2分</li>
+                                <li>剩余资源每个计0.1分</li>
+                                <li>总分最高的玩家获胜</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="events-panel" class="events-panel">
+                    <h3><i class="fas fa-bolt"></i> 当前事件</h3>
+                    <div id="active-events" class="active-events">
+                        <!-- 事件将在这里动态显示 -->
+                    </div>
                 </div>
                 <div class="control-panel">
                     <button onclick="makeMove('collect_wood')">
